@@ -4,42 +4,63 @@ const fs=require('fs');
 
 
 
-inquirer
+const techArray = [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "SQL",
+    "Mongo",
+  ];
+  
+  const licenseArray = ["IPL", "B50","GPL","MIT"];
+  
+  inquirer
     .prompt([
-        {
-            type:'input',
-            name:'Title',
-            message:'Please enter your project title here.',
-        },
-        {
-            type:'input',
-            name:'Description',
-            message:'Please enter your project description here.',
-        },
-        {
-            type:'input',
-            name:'Username',
-            message:'Please enter your project username here.',
-        },
-        {
-            type:'input',
-            name:'Email',
-            message:'Please enter your project e-mail here.',
-        },
-        {
-            type:'input',
-            name:'License',
-            message:'Please enter your project license here.',
-        },
+      {
+        type: "input",
+        message: "What is the name of your project?",
+        name: "title",
+      },
+      {
+        type: "input",
+        message: "Please provide a brief description of your project.",
+        name: "description",
+      },
+      {
+        type: "input",
+        message: "What are the motivation for your project?",
+        name: "motivation",
+      },
+
+      {
+        type: "list",
+        message: "Please select a license.",
+        name: "license",
+        choices: licenseArray,
+      },
+      {
+        type: "checkbox",
+        message: "What technologies were used for this application?",
+        name: "technologies",
+        choices: techArray,
+      },
+      {
+        type: "input",
+        message: "How many people contribute to this project?",
+        name: "contributing",
+      },
+  
+      {
+        type: "input",
+        message: "Please enter your email to receive user questions.",
+        name: "questions",
+      },
+      {
+        type: "input",
+        message: "Please provide your GitHub username for user questions.",
+        name: "github",
+      },
     ])
-
-// .then(data) =>
-// fs.writeFile('README.md',generateMarkdown(data),(err)=>{
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log("A ReadMe file was Successfully Created!")}}
-
 
 .then((answer) => fs.writeFile("README.md", generateMarkdown(answer), err => {
 if (err) {
