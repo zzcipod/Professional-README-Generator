@@ -2,10 +2,7 @@ const generateMarkdown=require("./utils/generateMarkdown")
 const inquirer=require('inquirer');
 const fs=require('fs');
 
-const questions = [];
 
-// TODO: Create a function to initialize app
-function init() {
 
 inquirer
     .prompt([
@@ -35,15 +32,20 @@ inquirer
             message:'Please enter your project license here.',
         },
     ])
-.then ((answers)=> writeToFile(answers));
+
+// .then(data) =>
+// fs.writeFile('README.md',generateMarkdown(data),(err)=>{
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log("A ReadMe file was Successfully Created!")}}
 
 
-
-
-
-
-.then (data) =>
-fs.writeFile('README.md',dataInput,(err)=>
-    err ? console.log(err) : console.log('file created!')   
-)
-}
+.then((answer) => fs.writeFile("README.md", generateMarkdown(answer), err => {
+if (err) {
+    console.log(err);
+} else {
+    console.log("A ReadMe file was Successfully Created!");
+    };
+    })
+    );
